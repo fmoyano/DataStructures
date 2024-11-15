@@ -1,38 +1,42 @@
 #include <stdio.h>
 
-#include "darray.h"
+#include "darray2.h"
 
 int main()
 {
-	Darray* array = Darray_create(10);
+	int* array_int = array(int);
 
-	Darray_debug(array);
+	for (int i = 0; i < 100000; ++i)
+	{
+		array_append(array_int, i);
+	}
+	/*array_append(array_int, 5);
+	array_append(array_int, 15);
+	//my_array[1] = 3;
+	int x = 2;
+	array_append(array_int, x);
+	array_insert(array_int, 1, 100);
+	array_insert(array_int, 0, 150);*/
+
+	printf("Length: %zd\n", array_length(array_int));
+	for (int i = 0; i < array_length(array_int); ++i)
+	{
+		printf("Array[%d] = %d\n", i, array_int[i]);
+	}
+
+	/*float* array_float = array(float);
+	array_append(array_float, 5.0f);
+	array_append(array_float, 15.0f);
+	//my_array[1] = 3;
 	
-	Darray_add(array, 1);
-	Darray_add(array, 20);
-	Darray_add(array, 35);
+	float y = 2.0f;
+	array_append(array_float, y);
 
-	Darray_debug(array);
-
-	Darray_remove(array, 0);
-
-	Darray_debug(array);
-
-	Darray_remove(array, 1);
-
-	Darray_debug(array);
-
-	Darray_remove(array, 0);
-
-	Darray_debug(array);
-
-	Darray_add(array, 100);
-	Darray_add(array, 2);
-	Darray_add(array, 45);
-	Darray_add(array, 28);
-	Darray_add(array, 5);
-	
-	Darray_debug(array);
+	printf("Length: %zd\n", array_length(array_float));
+	for (int i = 0; i < array_length(array_float); ++i)
+	{
+		printf("Array[%d] = %f\n", i, array_float[i]);
+	}*/
 
 	return 0;
 }
