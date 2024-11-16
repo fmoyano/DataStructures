@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdio.h>
+#include <string.h>
 
 void* array_init(size_t element_size, size_t initial_capacity)
 {
@@ -20,10 +21,14 @@ void* array_init(size_t element_size, size_t initial_capacity)
 	return ptr;
 }
 
-void *enlarge_array_if_required(void *array, size_t item_count, size_t item_size)
+void *enlarge_array_if_required(void *array, size_t pos, size_t item_size)
 {
 	Array_Header* header = array_header(array);
-	size_t desired_capacity = header->length + item_count;
+
+	//Make sure to return null pointer so that client code fails if it tries to insert beyond length
+	if (pos > header->length) return 0;
+	
+	size_t desired_capacity =  pos == header->length ? header->length + 1 : header->length;
 
 	if (header->capacity < desired_capacity)
 	{
