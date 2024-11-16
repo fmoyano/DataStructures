@@ -38,7 +38,7 @@ typedef struct {
 	(array)[(pos)] = (value), \
 	&(array)[(pos)]); \
 
-#define array_removeAt(array, pos) \
+#define array_removeAt(array, pos) do \
 { \
 	Array_Header* header = array_header(array); \
 	if ((pos) == header->length) \
@@ -52,7 +52,7 @@ typedef struct {
 		--header->length; \
 		memcpy(ptr, last_element, sizeof(*array)); \
 	} \
-}
+} while(0)
 
 void* array_init(size_t element_size, size_t initial_capacity);
 void *enlarge_array_if_required(void *array, size_t pos, size_t item_size);
