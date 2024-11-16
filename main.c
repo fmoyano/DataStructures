@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "darray2.h"
+#include "array.h"
 
 int main()
 {
@@ -64,6 +64,7 @@ int main()
 	{
 		printf("Array[%d] = %d\n", i, array_int[i]);
 	}
+
 	/*float* array_float = array(float);
 	array_append(array_float, 5.0f);
 	array_append(array_float, 15.0f);

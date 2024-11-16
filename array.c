@@ -1,8 +1,7 @@
-#include "darray2.h"
+#include "array.h"
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdio.h>
-#include <string.h>
 
 void* array_init(size_t element_size, size_t initial_capacity)
 {

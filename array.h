@@ -1,5 +1,5 @@
-#ifndef DARRAY_H
-#define DARRAY_H
+#ifndef ARRAY_H
+#define ARRAY_H
 
 #include <stddef.h>
 #include <string.h>
