@@ -35,6 +35,8 @@ typedef struct {
 	((pos) == array_header(array)->length) ? \
 		array_append(array, value) : \
 	((array) = enlarge_array_if_required(array, pos, sizeof(value)), \
+	array_header(array)->length++, \
+	memcpy(&array[(pos+1)], &array[pos], sizeof(*array)*(array_header(array)->length-1-(pos))), \
 	(array)[(pos)] = (value), \
 	&(array)[(pos)]); \
 
@@ -56,5 +58,11 @@ typedef struct {
 
 void* array_init(size_t element_size, size_t initial_capacity);
 void *enlarge_array_if_required(void *array, size_t pos, size_t item_size);
+
+inline void array_clear(void* array)
+{
+	Array_Header* header = (Array_Header*)array - 1;
+	header->length = 0;
+}
 
 #endif
