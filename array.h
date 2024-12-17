@@ -20,9 +20,21 @@ typedef struct {
     //Allocator *a;
 } Array_Header;
 
-#define array_header(array) ((Array_Header *)(array) - 1)
-#define array_length(array) (array_header(array)->length)
-#define array_capacity(array) (array_header(array)->capacity)
+
+inline Array_Header* array_header(void *array)
+{
+	return (Array_Header *)(array) - 1;
+}
+
+inline size_t array_length(void* array)
+{
+	return array_header(array)->length;
+}
+
+inline size_t array_capacity(void* array)
+{
+	return array_header(array)->capacity;
+}
 
 #define array(T) array_init(sizeof(T), INITIAL_ARRAY_CAPACITY)
 
