@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <assert.h>
 
 typedef struct Node
 {
@@ -122,6 +123,55 @@ Node* bintree_search(Node* node, int elem)
 		return bintree_search(node->left, elem);
 	else
 		return bintree_search(node->right, elem);
+}
+
+Node* bintree_min(Node* node)
+{
+	assert(!is_empty);
+
+	Node* current_node = node;
+	while (current_node->left)
+	{
+		current_node = current_node->left;
+	}
+
+	return current_node;
+}
+
+Node* bintree_max(Node* node)
+{
+	assert(!is_empty);
+
+	Node* current_node = node;
+	while (current_node->right)
+	{
+		current_node = current_node->right;
+	}
+
+	return current_node;
+}
+
+int bintree_value(Node* node)
+{
+	assert(!is_empty);
+	return node->elem;
+}
+
+Node* bintree_successor(Node* node)
+{
+	assert(!is_empty);
+	if (node->right) return bintree_min(node->right);
+
+	//If there is no right subtree, then the successor is the
+	//lowest ancestor whose left child is also ancestor
+}
+
+Node* bintree_predecessor(Node* node)
+{
+	assert(!is_empty);
+	if (node->left) return bintree_max(node->left);
+
+	//If there is no left subtree, then the predecessor is the
 }
 
 void bintree_print_left_first(Node* node)

@@ -17,6 +17,10 @@ int main()
 	printf("\n\n");
 	bintree_print_right_first(tree);
 
+
+	printf("Min value: %d\n", bintree_value(bintree_min(tree)));
+	printf("Max value: %d\n",  bintree_value(bintree_max(tree)));
+
 	bool res = bintree_remove(tree, 0);
 	printf("Removed 0 from tree: %d\n", res);
 
@@ -32,5 +36,9 @@ int main()
 	bintree_print_left_first(tree);
 	printf("\n\n");
 	bintree_print_right_first(tree);
+
+	printf("Min value: %d\n",  bintree_value(bintree_min(tree)));
+	printf("Max value: %d\n",  bintree_value(bintree_max(tree)));
+
 	return 0;
 }
