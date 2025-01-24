@@ -2,7 +2,6 @@
 #include "tsdefs.h"
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 #include <stdio.h>
 
 typedef struct Node
@@ -59,6 +58,61 @@ void bintree_insert(Node* node, int elem)
 		else
 			parent->right = current_node;
 	}
+}
+
+bool bintree_remove(Node* node, int elem)
+{
+	Node* node_to_remove = bintree_search(node, elem);
+	if (!node_to_remove) return false;
+
+	//Node to remove have no children
+	if (is_leaf(node_to_remove))
+	{
+		if (elem < node_to_remove->parent->elem)
+		{
+			node_to_remove->parent->left = 0;
+		}
+		else
+		{
+			node_to_remove->parent->right = 0;
+		}
+	}
+	//Node to remove has just one child
+	else if (!node_to_remove->left)
+	{
+		if (elem < node_to_remove->parent->elem)
+		{
+			node_to_remove->parent->left = node_to_remove->right;
+			node_to_remove->right->parent = node_to_remove->parent;
+		}
+		else
+		{
+			node_to_remove->parent->right = node_to_remove->right;
+			node_to_remove->right->parent = node_to_remove->parent;
+		}
+	}
+	//Node to remove has just one child
+	else if (!node_to_remove->right)
+	{
+		if (elem < node_to_remove->parent->elem)
+		{
+			node_to_remove->parent->left = node_to_remove->left;
+			node_to_remove->left->parent = node_to_remove->parent;
+		}
+		else
+		{
+			node_to_remove->parent->right = node_to_remove->left;
+			node_to_remove->left->parent = node_to_remove->parent;
+		}
+	}
+	//Node to remove has two children
+	else
+	{
+
+	}
+
+	free(node_to_remove);
+	return true;
 }
 
 Node* bintree_search(Node* node, int elem)
