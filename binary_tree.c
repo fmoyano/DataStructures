@@ -27,12 +27,13 @@ static inline bool is_leaf(Node *node)
 	return !(node->right || node->left); 
 }
 
-void bintree_insert(Node* node, int elem)
+Node* bintree_insert(Node* node, int elem)
 {
 	if (is_empty)
 	{
 		is_empty = false;
 		node -> elem = elem;
+		return node;
 	}
 	else
 	{
@@ -58,6 +59,8 @@ void bintree_insert(Node* node, int elem)
 			parent->left = current_node;
 		else
 			parent->right = current_node;
+
+		return current_node;
 	}
 }
 
@@ -163,7 +166,15 @@ Node* bintree_successor(Node* node)
 	if (node->right) return bintree_min(node->right);
 
 	//If there is no right subtree, then the successor is the
-	//lowest ancestor whose left child is also ancestor
+	//lowest ancestor whose left child is also ancestor	
+	Node* ancestor = node->parent;
+	while (ancestor && node == ancestor->right)
+	{
+		node = ancestor;
+		ancestor = ancestor->parent;
+	}
+
+	return ancestor;
 }
 
 Node* bintree_predecessor(Node* node)
@@ -172,6 +183,15 @@ Node* bintree_predecessor(Node* node)
 	if (node->left) return bintree_max(node->left);
 
 	//If there is no left subtree, then the predecessor is the
+	//lowest ancestor whose right child is also ancestor
+	Node* ancestor = node->parent;
+	while (ancestor && node == ancestor->left)
+	{
+		node = ancestor;
+		ancestor = ancestor->parent;
+	}
+
+	return ancestor;
 }
 
 void bintree_print_left_first(Node* node)

@@ -6,7 +6,7 @@
 typedef struct Node Node;
 
 Node* bintree_create();
-void bintree_insert(Node* root, int elem);
+Node* bintree_insert(Node* root, int elem);
 bool bintree_remove(Node* node, int elem);
 Node* bintree_search(Node* node, int elem);
 Node* bintree_min(Node* node);
