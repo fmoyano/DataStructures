@@ -12,17 +12,34 @@ int main()
 	Node* node30 = bintree_insert(tree, 30);
 	Node* node15 = bintree_insert(tree, 15);
 	Node* node14 = bintree_insert(tree, 14);
+	Node* node28 = bintree_insert(tree, 28);
+	Node* node29 = bintree_insert(tree, 29);
+	Node* node45 = bintree_insert(tree, 45);
+
 
 		// 10
-	// 5       //20
-// 2   //7   //15   //30
-	       //14
+	// 5         //20
+// 2   //7   //15    //30
+	       //14   //28  //45
+	                //29
 	//printf("Value of the root = %d\n", tree->elem)
+	bintree_print_left_first(tree);
+	printf("\n");
+	bintree_print_right_first(tree);
+
+	printf("\n\n");	
+	bintree_remove(tree, 2); printf("Removed 2\n");
+	bintree_remove(tree, 45); printf("Removed 45\n");
+	bintree_remove(tree, 20); printf("Removed 20\n");
+	bintree_remove(tree, 30); printf("Removed 30\n");
+
+
+	printf("\n");
 	bintree_print_left_first(tree);
 	printf("\n\n");
 	bintree_print_right_first(tree);
 
-	printf("Min value: %d\n", bintree_value(bintree_min(tree)));
+	/*printf("Min value: %d\n", bintree_value(bintree_min(tree)));
 	printf("Max value: %d\n",  bintree_value(bintree_max(tree)));
 
 	printf("Successor 10: %d\n",  bintree_value(bintree_successor(node10)));
@@ -41,8 +58,7 @@ int main()
 	printf("Predecessor 15: %d\n",  bintree_value(bintree_predecessor(node15)));
 	printf("Predecessor 20: %d\n",  bintree_value(bintree_predecessor(node20)));
 	printf("Predecessor 5: %d\n",  bintree_value(bintree_predecessor(node5)));
-
-	if (bintree_successor(node30)) printf("Successor 30: %d\n",  bintree_value(bintree_successor(node30)));
+	if (bintree_successor(node30)) printf("Successor 30: %d\n",  bintree_value(bintree_successor(node30)));*/
 
 
 

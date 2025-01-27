@@ -81,7 +81,7 @@ bool bintree_remove(Node* node, int elem)
 			node_to_remove->parent->right = 0;
 		}
 	}
-	//Node to remove has just one child
+	//Node to remove has just one child (right child)
 	else if (!node_to_remove->left)
 	{
 		if (elem < node_to_remove->parent->elem)
@@ -95,7 +95,7 @@ bool bintree_remove(Node* node, int elem)
 			node_to_remove->right->parent = node_to_remove->parent;
 		}
 	}
-	//Node to remove has just one child
+	//Node to remove has just one child (left child)
 	else if (!node_to_remove->right)
 	{
 		if (elem < node_to_remove->parent->elem)
@@ -112,11 +112,50 @@ bool bintree_remove(Node* node, int elem)
 	//Node to remove has two children
 	else
 	{
+		Node* successor = bintree_successor(node_to_remove);
+		/*if (!successor)
+		{
+			node->parent->right = 0;
+			free(node);
+		}*/
+		if (successor == node_to_remove->right)
+		{
+			successor->parent = node_to_remove->parent;
+			if (node->parent->right == node_to_remove) node_to_remove->parent->right = successor;
+			else node_to_remove->parent->left = successor;
+		}
+		else
+		{
+			Node* right_child_successor = successor->right;
+			successor->parent->left = right_child_successor;
+			right_child_successor->parent = successor->parent;
 
+			successor->parent = node_to_remove->parent;
+			if (node_to_remove->parent->right == node_to_remove) node_to_remove->parent->right = successor;
+			else node_to_remove->parent->left = successor;
+			successor->right = node_to_remove->right;
+			successor->left = node_to_remove->left;
+		}
 	}
 
 	free(node_to_remove);
+
 	return true;
+}
+
+//This function only updates where the parent of the old root points now and the parent of the new root
+//It doesn't update the left/right children of old_root or new_root
+void bintree_transplant(Node* old_root, Node *new_root)
+{
+	if (!old_root->parent)
+		old_root = new_root;
+	else if (old_root == old_root->parent->left)
+		old_root->parent->left = new_root;
+	else
+		old_root->parent->right = new_root;
+
+	if (!new_root) new_root->parent = old_root->parent;
+
 }
 
 Node* bintree_search(Node* node, int elem)
